@@ -42,7 +42,7 @@ ggplot(dfinto, aes(x= Value, y= Month ,color= Year))+
   geom_line(na.rm = TRUE, 
              position = 'dodge')
 ```
-```{r}
+```{r echo=FALSE, warning=FALSE}
 dfgg1 <- dfinto %>% 
   ggplot(aes(x=Month,
          y = Value,
@@ -55,7 +55,7 @@ dfgg1
 
 ```
 
-```{r}
+```{r echo=FALSE, warning=FALSE}
 dfinto_1 <- dfinto %>% 
   select(Value,Type,Year, Month) %>% 
   mutate(Month = as.factor(Month)) %>% 
@@ -68,7 +68,7 @@ dygraph(dfinto_1)
 
 
 
-```{r}
+```{r echo=FALSE, warning=FALSE}
 
 dfgg3 <- dfinto %>% 
   ggplot(aes(x = Year,y=Value))+
@@ -82,7 +82,7 @@ dfgg3 <- dfgg3+
 dfgg3
 ```
 
-```{r}
+```{r echo=FALSE, warning=FALSE}
 
 
 dfgg3 <- dfinto %>% 
