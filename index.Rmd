@@ -18,6 +18,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r include=FALSE, message=FALSE, echo=FALSE, warning=FALSE}
 library(tidyverse)
 library(lubridate)
+library(plotly)
 library(ggplot2)
 library(janitor)
 library(gganimate)
@@ -51,7 +52,9 @@ dfgg1 <- dfinto %>%
   ggtitle("in-to market sales YTD/Oct 18-21")
 
 
-dfgg1
+dfgg11 <- ggplotly(dfgg1)
+fgg11
+
 
 ```
 
