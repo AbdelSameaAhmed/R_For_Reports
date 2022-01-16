@@ -59,7 +59,7 @@ dfgg1
 dfinto_1 <- dfinto %>% 
   select(Value,Type,Year, Month) %>% 
   mutate(Month = as.factor(Month)) %>% 
-  mutate(Year = as.Date(Year))
+  mutate(Year = as.character(Year))
   
 
 dygraph(dfinto_1)
