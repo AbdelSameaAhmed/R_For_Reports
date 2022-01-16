@@ -41,19 +41,20 @@ dfinto <- dfinto %>%
 
 ggplot(dfinto, aes(x= Value, y= Month ,color= Year))+
   geom_line(na.rm = TRUE, 
-             position = 'dodge')
+             position = 'dodge', width= 10, height=7)
 ```
+
 ```{r echo=FALSE, warning=FALSE}
 dfgg1 <- dfinto %>% 
   ggplot(aes(x=Month,
          y = Value,
          fill=Type))+
-  geom_col(position = 'dodge')+
+  geom_col(position = 'dodge') +
   ggtitle("in-to market sales YTD/Oct 18-21")
 
 
 dfgg11 <- ggplotly(dfgg1)
-fgg11
+dfgg11
 
 
 ```
