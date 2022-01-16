@@ -1,7 +1,8 @@
 ---
 title: "About this site"
 description: |
-  Some additional details about the website
+  THis websit is analysis SFE reports for Sales and CRM
+  created Dec, 2021
 ---
 
 ```{r setup, include=FALSE}

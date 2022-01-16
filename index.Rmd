@@ -1,7 +1,7 @@
 ---
-title: "SFE Reports"
+title: "SAJA-Egypt IN Market and To Market Domestic"
 description: |
-  Welcome to the website. I hope you enjoy it!
+  This is the relation between in market and to market Domestic Sales 
 site: distill::distill_website
 ---
 
@@ -10,6 +10,91 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Learn more about creating websites with Distill at:
 # https://rstudio.github.io/distill/website.html
+
+```
+
+
+# in market sales Value 2018-2021
+```{r include=FALSE, message=FALSE, echo=FALSE, warning=FALSE}
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+library(janitor)
+library(gganimate)
+library(readxl)
+library(dygraphs)
+# names(dfinto)
+# read the data from csv file
+dfinto <- read_excel("in_to_YTD.xlsx")
+```
+
+
+```{r echo=FALSE, warning=FALSE}
+dfinto <- dfinto %>% 
+  select(everything()) %>% 
+  mutate(Year = as.factor(Year)) %>% 
+  filter(Month %in% c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct") ) %>% 
+  mutate(Month = as.factor(Month)) %>% 
+  #filter(month != c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct")) %>%
+  mutate(Value = Value/1000000)
+
+ggplot(dfinto, aes(x= Value, y= Month ,color= Year))+
+  geom_line(na.rm = TRUE, 
+             position = 'dodge')
+```
+```{r}
+dfgg1 <- dfinto %>% 
+  ggplot(aes(x=Month,
+         y = Value,
+         fill=Type))+
+  geom_col(position = 'dodge')+
+  ggtitle("in-to market sales YTD/Oct 18-21")
+
+
+dfgg1
+
+```
+
+```{r}
+dfinto_1 <- dfinto %>% 
+  select(Value,Type,Year, Month) %>% 
+  mutate(Month = as.factor(Month)) %>% 
+  mutate(Year = as.Date(Year))
+  
+
+dygraph(dfinto_1)
+
+```
+
+
+
+```{r}
+
+dfgg3 <- dfinto %>% 
+  ggplot(aes(x = Year,y=Value))+
+    geom_jitter(aes(col = Type))
+dfgg3
+
+dfgg3 <- dfgg3+
+  transition_states(Year,transition_length = 2,
+                    state_length = 0.5)+
+  ease_aes()
+dfgg3
+```
+
+```{r}
+
+
+dfgg3 <- dfinto %>% 
+  ggplot(aes(x = Year,y=Value))+
+  geom_boxplot(aes(fill = Type))
+dfgg3
+
+dfgg3 <- dfgg3+
+  transition_states(Year,transition_length = 2,
+                    state_length = 0.5)+
+  ease_aes()
+dfgg3
 
 ```
 
