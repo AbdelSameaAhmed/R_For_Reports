@@ -13,9 +13,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-***
+
 # IQVIA Monthly Intelligent Table
-***
 
 ```{r include=FALSE, message=FALSE, echo=FALSE, warning=FALSE}
 library(tidyverse)
@@ -31,7 +30,6 @@ library(rpivotTable)
 # read the data from csv file
 dfinto <- read_excel("in_to_YTD.xlsx")
 ```
-
 
 
 ```{r IQVIA, echo = FALSE,message=FALSE, warning=FALSE}
