@@ -1,7 +1,7 @@
 ---
 title: "SAJA-Egypt IQVIA Monthly Report"
 description: |
-  This is the relation between in market and to market Domestic Sales 
+  This is IQVIA Monthly Analysis 
 site: distill::distill_website
 ---
 
@@ -35,7 +35,7 @@ dfinto <- read_excel("in_to_YTD.xlsx")
 
 
 ```{r IQVIA, echo = FALSE,message=FALSE, warning=FALSE}
-IQVIA <- read_excel("C:\\Users\\asahmed\\Documents\\GitHub\\100DaysOfCode\\IQVIA_Dr.Mousa\\IQVIA/IQVIA.xlsx")
+IQVIA <- read_excel("C:\\Users\\asahmed\\Documents\\GitHub\\R_For_Reports\\IQVIA.xlsx")
 rpivotTable(IQVIA)
 
 ```
@@ -45,24 +45,24 @@ rpivotTable(IQVIA)
 ### Detailed Grphs
 
 ```{r echo=FALSE, warning=FALSE}
-dfinto <- dfinto %>% 
+dfinto <- IQVIA %>% 
   select(everything()) %>% 
-  mutate(Year = as.factor(Year)) %>% 
-  filter(Month %in% c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct") ) %>% 
-  mutate(Month = as.factor(Month)) %>% 
-  #filter(month != c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct")) %>%
-  mutate(Value = Value/1000000)
+  filter(Type_Unit_Value == "LC Value" )
+  
 
-ggplot(dfinto, aes(x= Value, y= Month ,color= Year))+
-  geom_line(na.rm = TRUE, 
-             position = 'dodge', width= 10, height=7)
+  # filter(month != c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct")) %>%
+  # mutate(Value = Value/1000000)
+
+ggplot(dfinto, aes(x = Year, y = Ammount )) +
+  geom_col(na.rm = TRUE, aes(fill=Year),
+             position = 'dodge')
 ```
 
 ```{r echo=FALSE, warning=FALSE}
 dfgg1 <- dfinto %>% 
   ggplot(aes(x=Month,
-         y = Value,
-         fill=Type))+
+         y = Ammount,
+         fill=Type_Unit_Value))+
   geom_col(position = 'dodge') +
   ggtitle("in-to market sales YTD/Oct 18-21")
 
@@ -75,9 +75,10 @@ dfgg11
 
 ```{r echo=FALSE, warning=FALSE}
 dfinto_1 <- dfinto %>% 
-  select(Value,Type,Year, Month) %>% 
-  mutate(Month = as.factor(Month)) %>% 
-  mutate(Year = as.character(Year))
+  select(Ammount,Type_Unit_Value,Year, Month) %>% 
+  mutate(Month = as.factor(Month)) %>%
+  mutate(Year = as.character(Year)) %>% 
+  mutate(Type = as.factor(Type_Unit_Value))
   
 
 dygraph(dfinto_1)
@@ -89,8 +90,8 @@ dygraph(dfinto_1)
 ```{r echo=FALSE, warning=FALSE}
 
 dfgg3 <- dfinto %>% 
-  ggplot(aes(x = Year,y=Value))+
-    geom_jitter(aes(col = Type))
+  ggplot(aes(x = Year,y=Ammount))+
+    geom_jitter(aes(col = Type_Unit_Value))
 dfgg3
 
 dfgg3 <- dfgg3+
@@ -104,8 +105,8 @@ dfgg3
 
 
 dfgg3 <- dfinto %>% 
-  ggplot(aes(x = Year,y=Value))+
-  geom_boxplot(aes(fill = Type))
+  ggplot(aes(x = Year,y=Ammount))+
+  geom_boxplot(aes(fill = Type_Unit_Value))
 dfgg3
 
 dfgg3 <- dfgg3+
