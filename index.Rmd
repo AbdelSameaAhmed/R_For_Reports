@@ -1,5 +1,5 @@
 ---
-title: "SAJA-Egypt IN Market and To Market Domestic"
+title: "SAJA-Egypt IQVIA Monthly Report"
 description: |
   This is the relation between in market and to market Domestic Sales 
 site: distill::distill_website
@@ -13,8 +13,10 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
+***
+# IQVIA Monthly Intelligent Table
+***
 
-# in market sales Value 2018-2021
 ```{r include=FALSE, message=FALSE, echo=FALSE, warning=FALSE}
 library(tidyverse)
 library(lubridate)
@@ -31,12 +33,16 @@ dfinto <- read_excel("in_to_YTD.xlsx")
 ```
 
 
+
 ```{r IQVIA, echo = FALSE,message=FALSE, warning=FALSE}
 IQVIA <- read_excel("C:\\Users\\asahmed\\Documents\\GitHub\\100DaysOfCode\\IQVIA_Dr.Mousa\\IQVIA/IQVIA.xlsx")
 rpivotTable(IQVIA)
 
 ```
 
+***
+
+### Detailed Grphs
 
 ```{r echo=FALSE, warning=FALSE}
 dfinto <- dfinto %>% 
