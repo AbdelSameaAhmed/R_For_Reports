@@ -24,9 +24,17 @@ library(janitor)
 library(gganimate)
 library(readxl)
 library(dygraphs)
+library(rpivotTable)
 # names(dfinto)
 # read the data from csv file
 dfinto <- read_excel("in_to_YTD.xlsx")
+```
+
+
+```{r IQVIA, echo = FALSE,message=FALSE, warning=FALSE}
+IQVIA <- read_excel("C:\\Users\\asahmed\\Documents\\GitHub\\100DaysOfCode\\IQVIA_Dr.Mousa\\IQVIA/IQVIA.xlsx")
+rpivotTable(IQVIA)
+
 ```
 
 
